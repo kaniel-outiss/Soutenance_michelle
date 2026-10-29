@@ -3,7 +3,7 @@ const path = require('path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1280, height: 820, minWidth: 900, minHeight: 600,
+    width: 1280, height: 820, minWidth: 480, minHeight: 420,
     title: 'Soutenance Michelle',
     icon: path.join(__dirname, 'build', 'icon.png'),
     autoHideMenuBar: true,
