@@ -19,7 +19,11 @@ function createWindow() {
       const ext = screen.getAllDisplays().find(d => d.id !== primary.id);
       const opts = { autoHideMenuBar: true, backgroundColor: '#000000', title: 'Projection', icon: path.join(__dirname, 'build', 'icon.png') };
       if (ext) Object.assign(opts, { x: ext.bounds.x, y: ext.bounds.y, width: ext.bounds.width, height: ext.bounds.height, fullscreen: true, frame: false });
-      else Object.assign(opts, { width: 1280, height: 720 });
+      else {
+        // Pas de vidéoprojecteur : fenêtre flottante, toujours au premier plan, en bas à droite de l'écran
+        const wa = primary.workArea, w = Math.round(wa.width * 0.42), h = Math.round(w * 9 / 16);
+        Object.assign(opts, { width: w, height: h, x: wa.x + wa.width - w - 16, y: wa.y + wa.height - h - 16, alwaysOnTop: true, title: 'Projection (fenêtre flottante)' });
+      }
       return { action: 'allow', overrideBrowserWindowOptions: opts };
     }
     // Liens externes : navigateur
